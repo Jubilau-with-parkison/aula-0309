@@ -1,0 +1,66 @@
+<meta charset="UTF-8">
+<script>
+    class ContaB {
+        #saldo
+        constructor(nome, saldo){
+            this.nome = nome;
+            this.#saldo = saldo;
+        }
+        consultarS(){
+            return `${this.nome} você tem R$${this.#saldo} na conta`;
+        }
+        depositar(valor, tipo){
+            this.#saldo+=valor;
+            this.tipo = tipo;
+        }
+    }
+    class ContaCorre extends ContaB{
+        depositar(valor, tipo){
+            super.depositar(valor, tipo);
+            return `Depósito realizado na conta corrente com ${this.tipo}`;
+        }
+    }
+
+    class ContaPoupa extends ContaB{
+        #saldo
+        constructor(nome, saldo){
+            super(nome);
+            this.#saldo = saldo
+        }
+
+        sacar(valor){
+            this.#saldo -= valor
+            return "Valor sacado: " + valor + " O novo valor passa a ser " + this.#saldo
+        }
+    }
+    let u2 = new ContaPoupa("Pablo", 2500);
+    console.log(u2.sacar(600));
+
+    let u1 = new ContaCorre("Pablo", 1500);
+    console.log(u1.depositar(850, "Pix"));
+    console.log(u1.consultarS());
+
+
+
+    class Produto{
+        #nome;
+        #preco;
+        #estoque;
+        constructor(nome, preco, estoque){
+            this.#nome = nome;
+            this.#preco = preco;
+            this.#estoque = estoque;
+        }
+        consultarP(){
+            return `Produto: ${this.#nome} de Preço: ${this.#preco} e qtd que tem no estoque: ${this.#estoque}`;
+        }
+        adicionarE(adi, motivo){
+            this.#estoque+=adi;
+            this.m = motivo
+            return `Atualizou! Motivo: ${this.m} e agora tem ${this.#estoque} produtos`
+        }
+    }
+    let p1 = new Produto("notebook", 2500, 2);
+    console.log(p1.consultarP());
+    console.log(p1.adicionarE(4, "Pq ta pouco"));
+</script>
