@@ -13,32 +13,43 @@
             this.#saldo+=valor;
             this.tipo = tipo;
         }
+        get saldoAtual() {
+        return this.#saldo;
+    }
+    debitar(valor){
+        this.#saldo -= valor;
+    }
+
+    get saldo() {return this.#saldo;}
     }
     class ContaCorre extends ContaB{
+        constructor(nome, saldo){
+            super(nome, saldo);
+        }
         depositar(valor, tipo){
             super.depositar(valor, tipo);
-            return `Depósito realizado na conta corrente com ${this.tipo}`;
+            valor += this.saldo;
+            return `Depósito realizado na conta corrente com ${this.tipo} e sua conta está com ${this.saldo} ${this.nome}`;
         }
     }
 
     class ContaPoupa extends ContaB{
-        #saldo
         constructor(nome, saldo){
-            super(nome);
-            this.#saldo = saldo
+            super(nome, saldo);
         }
 
         sacar(valor){
-            this.#saldo -= valor
-            return "Valor sacado: " + valor + " O novo valor passa a ser " + this.#saldo
+            this.debitar(valor)
+            return `Valor sacado: ${valor}. O novo valor passa a ser R$${this.saldo}`;
         }
     }
-    let u2 = new ContaPoupa("Pablo", 2500);
+    let u2 = new ContaPoupa("Sargento patriqui", 2500);
+    console.log(u2.consultarS());
     console.log(u2.sacar(600));
 
     let u1 = new ContaCorre("Pablo", 1500);
-    console.log(u1.depositar(850, "Pix"));
     console.log(u1.consultarS());
+    console.log(u1.depositar(850, "Pix"));
 
 
 
@@ -59,8 +70,26 @@
             this.m = motivo
             return `Atualizou! Motivo: ${this.m} e agora tem ${this.#estoque} produtos`
         }
+        get nome() { return this.#nome; }
+        get preco() { return this.#preco; }
+        get estoque() { return this.#estoque; }
     }
+
+    class PPerecivel extends Produto {
+        constructor(nome, preco, estoque, dv){
+            super(nome, preco, estoque);
+            this.dataValidade = dv;
+    }
+    mostrartp(){
+        console.log(`Produto ${this.nome} de ${this.preco} com ${this.estoque} unidades no estoque está a ${this.dataValidade} de chegar a validade`);
+    }
+    }
+
     let p1 = new Produto("notebook", 2500, 2);
     console.log(p1.consultarP());
-    console.log(p1.adicionarE(4, "Pq ta pouco"));
+    console.log(p1.adicionarE(4, "Pq ta poucos produtos"));
+
+    let p2 = new PPerecivel("Acido isopropilico", 39.99, 12, "12 meses");
+    p2.mostrartp();
+
 </script>
