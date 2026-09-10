@@ -3,7 +3,7 @@
     class Conta {
         #saldo
         #tipo
-        constructor(nome, saldo, tipo){
+        constructor(nome, saldo=0, tipo="comum"){
             this.#saldo = saldo;
             this.#tipo = tipo;
             this.nome = nome;
@@ -28,7 +28,7 @@
     conta1.depositar(10000);
     conta1.sacar(999);
 
-    let conta2 = new Conta("Emilio", 80000, "de herança");
+    let conta2 = new Conta("Emilia", 80000, "de herança");
     conta2.consultar();
     conta2.depositar(0);
     conta2.sacar(80000);
@@ -37,8 +37,8 @@
     conta3.consultar();
     conta3.depositar(100);
     conta3.sacar(0);
-    
-    let conta4 = new Conta("Adoniran", 500, "comum");
+
+    let conta4 = new Conta("Adoniran", 500);
     conta4.consultar();
     conta4.depositar(900);
     conta4.sacar(10);
