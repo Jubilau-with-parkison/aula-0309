@@ -1,0 +1,30 @@
+<meta charset="UTF-8">
+<script>
+    class Conta {
+        #saldo
+        #tipo
+        constructor(nome, saldo, tipo){
+            this.#saldo = saldo;
+            this.#tipo = tipo;
+            this.nome = nome;
+        }
+        depositar(valorD){
+            this.#saldo += valorD;
+            console.log(`Sr(a) ${this.nome} depositou R$${valorD} agora sua conta está com R$${this.#saldo} ,em sua conta ${this.#tipo}`)
+        }
+        sacar(valorS){
+            this.#saldo -= valorS
+            console.log(`Sr(a) ${this.nome} sacou ${valorS} agora sua conta está com R$${this.#saldo} ,em sua conta ${this.#tipo}`)
+        }
+        consultar(){
+            console.log(`Sr(a) ${this.nome} saldo atual: R$${this.#saldo} conta ${this.#tipo}`)
+        }
+        get saldo() { return this.#saldo;}
+        get tipo() { return this.#tipo;}
+    }
+
+    let conta1 = new Conta("Arnesto", 0, "de investimentos");
+    conta1.consultar();
+    conta1.depositar(10000);
+    conta1.sacar(999);
+</script>
